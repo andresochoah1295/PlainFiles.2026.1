@@ -1,4 +1,8 @@
-﻿//using Core;
+﻿//======================================================================
+// EXAMPLE 1
+//======================================================================
+
+//using Core;
 
 //var textFile = new SimpleTextFile("c:\\tmp\\animals.txt");
 //using var logger = new LogWriter("c:\\tmp\\app.log");
@@ -55,7 +59,6 @@
 //    logger.WriteLog("info", "Application ended.");
 //}
 
-
 //string Menu()
 //{
 //    Console.WriteLine("Menu:");
@@ -70,23 +73,49 @@
 //    return Console.ReadLine() ?? string.Empty;
 //}
 
-var people = new List<string[]>
-{
-    new[] { "Id", "Name", "Age"},
-    new[] { "1", "Juan", "51"},
-    new[] { "2", "Maria", "46"},
-    new[] { "3", "Valery", "16"},
-};
+//======================================================================
+// EXAMPLE 2
+//======================================================================
 
-var manualCsvHelper = new ManualCsvHelper();
-manualCsvHelper.WriteCSV("c:\\tmp\\people.csv", people);
+//var people = new List<string[]>
+//{
+//    new[] { "Id", "Name", "Age"},
+//    new[] { "1", "Juan", "51"},
+//    new[] { "2", "Maria", "46"},
+//    new[] { "3", "Valery", "16"},
+//};
 
-var loadedPeople = manualCsvHelper.ReadCSV("c:\\tmp\\people.csv");
-foreach (var person in loadedPeople)
-{
-    Console.WriteLine(string.Join("|", person));
-}
+//var manualCsvHelper = new ManualCsvHelper();
+//manualCsvHelper.WriteCSV("c:\\tmp\\people.csv", people);
+
+//var loadedPeople = manualCsvHelper.ReadCSV("c:\\tmp\\people.csv");
+//foreach (var person in loadedPeople)
+//{
+//    Console.WriteLine(string.Join("|", person));
+//}
 
 // Homework: Implement a CSV helper with a menu.
 
+//======================================================================
+// EXAMPLE 3
+//======================================================================
 
+using Core;
+
+var list = new List<Person>()
+{
+    new() { Id = 1, Name = "Juan", Age = 51 },
+    new() { Id = 2, Name = "Maria", Age = 46 },
+    new() { Id = 3, Name = "Valery", Age = 16 },
+    new() { Id = 4, Name = "Sofia", Age = 14 },
+    new() { Id = 5, Name = "Carlos", Age = 20 },    
+};
+
+var helper = new CsvHelperExample();
+helper.Write("c:\\tmp\\people2.csv", list);
+var people = helper.Read("c:\\tmp\\people2.csv");
+
+foreach (var p in people)
+{
+    Console.WriteLine($"{p.Id}: {p.Name} ({p.Age} years old)");  
+}
